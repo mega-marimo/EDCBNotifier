@@ -141,6 +141,9 @@ class Utils:
             'TimeI': str(int(time.strftime('%M'))),
             'TimeSS': time.strftime('%S'),
             'TimeS': str(int(time.strftime('%S'))),
+
+            # チャンネルIDマクロ
+            'ChannelID': Utils.getChannelId(jaconv.z2h(environ.get('ServiceName', macro_default), digit=True, ascii=True, kana=False)),
         }
 
         return macro_table
@@ -323,3 +326,147 @@ class Utils:
         print(f'{colorama.Fore.RED}Error: {message}')
         print('=' * TERMINAL_WIDTH)
         sys.exit(1)
+
+    @staticmethod
+    def getChannelId(service_name: str) -> str:
+        """
+        チャンネル名からチャンネルIDを取得する
+
+        Args:
+            service_name: チャンネル名
+
+        Returns:
+            str: チャンネル名に対応するチャンネルID
+        """
+
+        # BS
+        if 'NHK BS' in service_name:
+            channel_id = 'bs101'
+        elif 'NHK' in service_name:
+            channel_id = 'bs103'
+        elif 'BS日テレ' in service_name:
+            channel_id = 'bs141'
+        elif 'BS朝日' in service_name:
+            channel_id = 'bs151'
+        elif 'BS-TBS' in service_name:
+            channel_id = 'bs161'
+        elif 'BSテレ東' in service_name:
+            channel_id = 'bs171'
+        elif 'BSフジ' in service_name:
+            channel_id = 'bs181'
+        elif 'BS11イレブン' in service_name:
+            channel_id = 'bsbs211'
+        elif 'BS12トゥエルビ' in service_name:
+            channel_id = 'bs222'
+        elif 'BS松竹東急' in service_name:
+            channel_id = 'bs260'
+        elif 'BSJapanext' in service_name:
+            channel_id = 'bs263'
+        elif 'BSよしもと' in service_name:
+            channel_id = 'bs265'
+
+        # CS
+        elif '東映チャンネル' in service_name:
+            channel_id = 'cs218'
+        elif '衛星劇場' in service_name:
+            channel_id = 'cs219'
+        elif 'chNECO' in service_name:
+            channel_id = 'cs223'
+        elif 'ザ・シネマ' in service_name:
+            channel_id = 'cs227'
+        elif 'ムービープラス' in service_name:
+            channel_id = 'cs240'
+        elif 'スカイA' in service_name:
+            channel_id = 'cs250'
+        elif 'GAORA' in service_name:
+            channel_id = 'cs254'
+        elif '日テレジータス' in service_name:
+            channel_id = 'cs257'
+        elif 'ゴルフネットワーク' in service_name:
+            channel_id = 'cs262'
+        elif 'SKY STAGE' in service_name:
+            channel_id = 'cs290'
+        elif '時代劇専門ch' in service_name:
+            channel_id = 'cs292'
+        elif 'ファミリー劇場' in service_name:
+            channel_id = 'cs293'
+        elif 'ホームドラマCH' in service_name:
+            channel_id = 'cs294'
+        elif 'MONDO TV' in service_name:
+            channel_id = 'cs295'
+        elif 'TBSチャンネル1' in service_name:
+            channel_id = 'cs296'
+        elif 'TBSチャンネル2' in service_name:
+            channel_id = 'cs297'
+        elif 'TBSチャンネル3' in service_name:
+            channel_id = 'cs298'
+        elif 'テレ朝チャンネル1' in service_name:
+            channel_id = 'cs298'
+        elif 'テレ朝チャンネル2' in service_name:
+            channel_id = 'cs299'
+        elif '日テレプラス' in service_name:
+            channel_id = 'cs300'
+        elif 'エンタメ～テレ' in service_name:
+            channel_id = 'cs301'
+        elif 'チャンネル銀河' in service_name:
+            channel_id = 'cs305'
+        elif 'フジテレビONE' in service_name:
+            channel_id = 'cs307'
+        elif 'フジテレビTWO' in service_name:
+            channel_id = 'cs308'
+        elif 'フジテレビNEXT' in service_name:
+            channel_id = 'cs309'
+        elif 'スーパー!ドラマTV' in service_name:
+            channel_id = 'cs310'
+        elif 'アクションチャンネル' in service_name:
+            channel_id = 'cs311'
+        elif 'Dlife' in service_name:
+            channel_id = 'cs312'
+        elif 'LaLaTV' in service_name:
+            channel_id = 'cs314'
+        elif 'ミステリーチャンネル' in service_name:
+            channel_id = 'cs316'
+        elif 'スペシャプラス' in service_name:
+            channel_id = 'cs321'
+        elif 'スペースシャワーTV' in service_name:
+            channel_id = 'cs322'
+        elif 'MTV' in service_name:
+            channel_id = 'cs323'
+        elif 'ミュージック・エア' in service_name:
+            channel_id = 'cs324'
+        elif 'エムオン!' in service_name:
+            channel_id = 'cs325'
+        elif '歌謡ポップス' in service_name:
+            channel_id = 'cs329'
+        elif 'キッズステーション' in service_name:
+            channel_id = 'cs330'
+        elif 'カートゥーン' in service_name:
+            channel_id = 'cs331'
+        elif 'AT-X' in service_name:
+            channel_id = 'cs333'
+
+        # 地デジ
+        elif 'NHK総合' in service_name:
+            channel_id = 'gr011'
+        elif 'NHKEテレ' in service_name:
+            channel_id = 'gr021'
+        elif '日テレ' in service_name:
+            channel_id = 'gr041'
+        elif 'テレビ朝日' in service_name:
+            channel_id = 'gr051'
+        elif 'TBS' in service_name:
+            channel_id = 'gr061'
+        elif 'テレビ東京' in service_name:
+            channel_id = 'gr071'
+        elif 'フジテレビ' in service_name:
+            channel_id = 'gr081'
+        elif 'TOKYO MX1' in service_name:
+            channel_id = 'gr091'
+        elif 'TOKYO MX2' in service_name:
+            channel_id = 'gr092'
+
+        # チャンネル名に対応するものを見つけられなかったらNone
+        else:
+            channel_id = 'None'
+
+        return channel_id
