@@ -9,6 +9,7 @@ from SendDiscord import Discord
 from SendLINE import LINE
 from SendTwitter import Twitter
 from SendMastodon import Mastodon
+from SendNtfy import Ntfy
 
 # バージョン情報
 VERSION = '2.0.0'
@@ -225,6 +226,26 @@ def main():
         else:
             print('[MastodonDirectMessage] Result: Success')
             print(f'[MastodonDirectMessage] MastodonDirectMessage: {result_toot["url"]}')
+
+    # ntfyのトピックに通知を送信
+    if 'Ntfy' in CONFIG['general']['notify_type']:
+
+        print('-' * TERMINAL_WIDTH)
+
+        ntfy = Ntfy(
+            CONFIG['ntfy']['server_url'],
+            CONFIG['ntfy']['topic_name'],
+            CONFIG['ntfy']['access_token'],
+        )
+        # トピックに通知を送信
+        try:
+            result_ntfy: dict = ntfy.sendMessage(message, image_path=image)
+        except Exception as error:
+            print('[Ntfy] Result: Failed')
+            print(f"[Ntfy] {colorama.Fore.RED}Error: {result_ntfy['message']}")
+        else:
+            print('[Ntfy] Result: Success')
+            print(f"[Ntfy] ntfy: {result_ntfy['message']}")
 
     print('=' * TERMINAL_WIDTH)
 

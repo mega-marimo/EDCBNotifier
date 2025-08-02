@@ -12,15 +12,15 @@
         # ====================  全般  ====================
 
         # ***** 通知タイプ *****
-        # LINE (LINE Notify)・Discord (Discord Webhook)・Tweet (ツイート)・Toot（トゥート）・DirectMessage (ダイレクトメッセージ) ・MastodonDirectMessage（Mastodon のダイレクトメッセージ）から選択します。
+        # LINE (LINE Notify)・Discord (Discord Webhook)・Tweet (ツイート)・Toot（トゥート）・DirectMessage (ダイレクトメッセージ) ・MastodonDirectMessage（Mastodon のダイレクトメッセージ） ・Ntfy（ntfyのトピックに通知）から選択します。
         # [] 内にカンマ区切りで複数の通知タイプを設定できます。
 
         # ex (LINE Notify): ['LINE']
         # ex (LINE Notify と Discord Webhook): ['LINE', 'Discord']
         # ex (ツイートとダイレクトメッセージ): ['Tweet', 'DirectMessage']
-        # ex (すべてに通知): ['LINE', 'Discord', 'Tweet', 'DirectMessage']
+        # ex (すべてに通知): ['LINE', 'Discord', 'Tweet', 'DirectMessage', 'Ntfy']
 
-        'notify_type': ['LINE', 'Discord', 'Tweet', 'DirectMessage'],
+        'notify_type': ['LINE', 'Discord', 'Tweet', 'DirectMessage', 'Ntfy'],
 
         # ***** 通知を行うイベント *****
         # 通知するイベントのオン・オフを指定できます。たとえば通知頻度の多い PostNotify だけ通知しない設定も可能です。
@@ -210,5 +210,36 @@
         # ***** Mastodon API の アクセス トークン *****
         # Mastodon の API にアクセスするためのアクセス トークンを指定します。
         'access_token': 'YOUR_MASTODON_ACCESS_TOKEN',
+    },
+
+    'ntfy': {
+
+        # ======================  ntfy  ======================
+
+        # *** サーバURL ***
+        # 通知を送信するntfyサーバのURLを指定します。
+        # この項目は必須の設定項目です。
+        # http/httpsも含めて記載します。
+
+        # ex (ntfy.shの公式サーバ): 'https://ntfy.sh'
+        # ex (セルフホストしたサーバのURL): 'https://ntfy.example.jp'
+        'server_url': 'https://ntfy.sh',
+
+        # ***** トピック名 *****
+        # 通知を送信するトピック名を指定します。
+        # この項目は必須の設定項目です。
+        # 公式サーバを使用する場合、他人が同じトピック名を使っているとEDCBNotifierの通知を見られる可能性があります。（https://docs.ntfy.sh/#step-1-get-the-app）
+
+        # ex (任意のトピック名を設定する): 'EDCBNotifier'
+        'topic_name': 'EDCBNotifier',
+
+        # ***** ntfy の アクセス トークン *****
+        # ntfyサーバのトピックに対するアクセストークンを指定する。
+        # ntfyサーバをセルフホストしアクセス制限していると通知の送信にトークンが必要になります。
+        # 不要な場合はnullを指定する。
+
+        # ex (不要な場合): null
+        # ex (必要な場合): 'YOUR_NTFY_ACCESS_TOKEN'
+        'access_token': null,
     },
 }
